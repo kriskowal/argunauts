@@ -1,0 +1,5 @@
+
+tcall autobahn --thrift Autobahn.thrift -1 service-hosts-connections -3 [ --serviceName ncar ]
+
+tcall autobahn --json -1 service-hosts-connections -3 [ --serviceName ncar ]
+
