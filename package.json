@@ -1,0 +1,33 @@
+{
+  "name": "argunaut",
+  "version": "0.0.0",
+  "description": "An argument parser that goes well with JSON",
+  "main": "dsl.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chalk": "^1.0.0"
+  },
+  "devDependencies": {
+    "tape": "^3.5.0"
+  },
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kriskowal/argunauts.git"
+  },
+  "keywords": [
+    "argument",
+    "parser",
+    "arguments"
+  ],
+  "author": "Kris Kowal <kris@cixar.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kriskowal/argunauts/issues"
+  },
+  "homepage": "https://github.com/kriskowal/argunauts"
+}
