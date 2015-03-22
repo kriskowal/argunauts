@@ -13,7 +13,7 @@ Object        | `{"hello": "World"}` | `[ --hello World ]`
 Array         | `["beep", "boop"]`   | `[ beep boop ]`
 Array         | `[1, 2, 3]`          | `[ 1 2 3 ]`
 Empty Array   | `[]`                 | `[ ]` or `[]`
-Object        | `{"a": 10, b: "20"}` | `[ --a 10 --b 20 ]`
+Object        | `{"a": 10, b: 20}`   | `[ --a 10 --b 20 ]`
 Empty Object  | `{}`                 | `[ -- ]`
 Number        | `1`                  | `1`
 Number        | `-1`                 | `-1`
