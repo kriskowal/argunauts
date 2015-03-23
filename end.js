@@ -3,6 +3,12 @@
 module.exports = End;
 
 function End(handler) {
+    if (!handler) {
+        throw new Error('Must provide handler');
+    }
+    if (!handler.handleError) {
+        throw new Error('Handler must implement handleError');
+    }
     this.handler = handler;
 }
 
@@ -19,6 +25,10 @@ function Beyond(handler) {
 }
 
 Beyond.prototype.parse = function (argument) {
-    return this.handler.handleError('Got ' + argument + ' beyond EOF');
+    if (argument === null) {
+        return this;
+    } else {
+        return this.handler.handleError('Got ' + argument + ' beyond EOF');
+    }
 };
 

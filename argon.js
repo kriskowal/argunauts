@@ -37,7 +37,7 @@ ValueState.prototype.parse = function (argument) {
     } else if (argument === '--') {
         return new StringState(this.handler, this.key);
     } else if (argument.lastIndexOf('--', 0) === 0) {
-        return this.handler.handleError('');
+        return this.handler.handleError('Expected a value, got unexpected flag ' + argument);
     } else if (+argument === +argument) {
         return this.handler.handleValue(+argument, this.key);
     } else if (argument.lastIndexOf('-', 0) === 0) {

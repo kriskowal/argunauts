@@ -19,7 +19,8 @@ function OptionalState(handler, of, key) {
 
 OptionalState.prototype.parse = function (argument) {
     if (argument === null) {
-        return this.handler.handleValue(null, this.key);
+        // TODO consider a better way to do one or the other branches
+        return this.handler.parse(null);
     } else {
         return this.of.createInitialState(this.handler, this.key).parse(argument);
     }

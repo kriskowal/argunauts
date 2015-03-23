@@ -5,27 +5,30 @@ var End = require('./end');
 
 module.exports = Parser;
 
-function Parser(language) {
-    this.state = language.createInitialState(this);
+function Parser(parser) {
+    this.state = parser.createInitialState(this);
     this.index = null;
     this.value = null;
     if (!this.state || !this.state.parse) {
-        throw new Error('Language did not return initial state with parse method: ' + language.constructor.name);
+        throw new Error('Language did not return initial state with parse method: ' + parser.constructor.name);
     }
 }
 
 Parser.prototype.parse = function (args, start, end) {
+    if (args === null) {
+        return this;
+    }
     start = start || 0;
     end = end || args.length;
     this.args = args;
     while (start < end) {
         this.index = start;
-        var previousShape = this.state;
+        var previousState = this.state;
         this.state = this.state.parse(args[start]);
         if (!this.state) {
             this.state = this.handleError(
                 'Prior state returned an undefined next state ' +
-                previousShape.constructor.name
+                previousState.constructor.name
             );
         }
         if (!this.state || this.state.stop) {
@@ -47,8 +50,12 @@ Parser.prototype.handleValue = function (value) {
 
 Parser.prototype.handleError = function (message) {
     var args = this.args.slice();
-    args.splice(this.index, 1, chalk.red('^') + args[this.index]);
-    var error = new Error(message + ' at ' + args.join(' '));
+    args.splice(this.index, 1, chalk.red('^') + (args[this.index] || ''));
+    return this.throwError(message + ' at ' + args.join(' '));
+};
+
+Parser.prototype.throwError = function (message) {
+    var error = new Error(message);
     error.index = this.index;
     throw error;
 };

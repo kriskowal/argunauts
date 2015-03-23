@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "An argument parser that goes well with JSON",
   "main": "dsl.js",
+  "bin": {
+    "argon": "bin/argon.js"
+  },
   "directories": {
     "test": "test"
   },
