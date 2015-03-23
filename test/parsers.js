@@ -7,6 +7,8 @@ var OptionalParser = require('../optional');
 var CommandParser = require('../command');
 var FlagParser = require('../flag');
 var NamedParser = require('../named');
+var ChainParser = require('../chain');
+var IntParser = require('../int');
 var binArgonParser = require('../bin/argon').parser;
 
 module.exports = {
@@ -74,6 +76,23 @@ module.exports = {
         input: ['[', '--a', '10', ']', '--tab='],
         error: 'Expected integer',
         index: 4
+    },
+
+    'chain parser': {
+        parser: new ChainParser([
+            new NamedParser('a', new IntParser()),
+            new NamedParser('b', new IntParser()),
+            new NamedParser('c', new IntParser()),
+        ]),
+        input: ['10', '20', '30'],
+        output: {
+            options: {
+                a: 10,
+                b: 20,
+                c: 30
+            },
+            arguments: []
+        }
     },
 
 };

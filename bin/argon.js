@@ -7,7 +7,6 @@ var NamedParser = require('../named');
 var ArgonParser = require('../argon');
 var UIntParser = require('../uint');
 var OptionParser = require('../option');
-var OptionalParser = require('../optional');
 
 module.exports = main;
 

@@ -28,5 +28,5 @@ True          | `true`               | `-t`
 False         | `false`              | `-f`
 Null          | `null`               | `-n`
 
-Argunauts includes an `argon` command which accepts ArgOn arguments and the `-t`
+Argunauts includes an `argon` command which accepts ArgON arguments and the `-t`
 or `--tab` option and prints the corresponding JSON.
