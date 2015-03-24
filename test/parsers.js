@@ -2,7 +2,7 @@
 
 var StringParser = require('../string');
 var ArrayParser = require('../array');
-var ArgonParser = require("../argon");
+var ArgonInlineParser = require("../argon-inline");
 var OptionalParser = require('../optional');
 var CommandParser = require('../command');
 var FlagParser = require('../flag');
@@ -76,6 +76,36 @@ module.exports = {
         input: ['[', '--a', '10', ']', '--tab='],
         error: 'Expected integer',
         index: 4
+    },
+
+    'argon inline object': {
+        parser: new ArgonInlineParser(),
+        input: ['--a', '10', '--b', '[', '20', '30', '40', ']'],
+        output: {a: 10, b: [20, 30, 40]}
+    },
+
+    'array of one argon inline object': {
+        parser: new ArrayParser(new ArgonInlineParser()),
+        input: ['--a', '10', '--b', '[', '20', '30', '40', ']'],
+        output: [{a: 10, b: [20, 30, 40]}]
+    },
+
+    'array of two argon inline objects': {
+        parser: new ArrayParser(new ArgonInlineParser()),
+        input: ['--a', '10', '--b', '[', '20', '30', '40', ']', '--', '--a', '10'],
+        output: [{a: 10, b: [20, 30, 40]}, {a: 10}]
+    },
+
+    'empty array of argon inline objects': {
+        parser: new ArrayParser(new ArgonInlineParser()),
+        input: [],
+        output: []
+    },
+
+    'array of argon single empty argon object': {
+        parser: new ArrayParser(new ArgonInlineParser()),
+        input: ['--'],
+        output: [{}]
     },
 
     'chain parser': {
