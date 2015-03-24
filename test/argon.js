@@ -103,6 +103,10 @@ module.exports = [
         output: [['hi']]
     },
     {
+        input: ['[', '--xs', '[', '--ys', 'y', ']', ']'],
+        output: {xs: {ys: 'y'}}
+    },
+    {
         input: ['--', '['],
         output: '['
     },

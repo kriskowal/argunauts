@@ -69,13 +69,13 @@ ArrayOrObjectState.prototype.parse = function (argument) {
             '-- for empty object, or closing bracket ], got end of arguments'
         );
     } else if (argument === ']') {
-        return this.handler.handleValue([]);
+        return this.handler.handleValue([], this.key);
     } else if (argument === '--') {
         return new ObjectState(this.handler, this.key);
     } else if (argument.lastIndexOf('-', 0) === 0) {
-        return new ObjectState(this.handler).parse(argument);
+        return new ObjectState(this.handler, this.key).parse(argument);
     } else {
-        return new ArrayState(this.handler).parse(argument);
+        return new ArrayState(this.handler, this.key).parse(argument);
     }
 };
 
@@ -106,8 +106,9 @@ ArrayState.prototype.handleError = function (message) {
     return this.handler.handleError(message);
 };
 
-function ObjectState(handler) {
+function ObjectState(handler, key) {
     this.handler = handler;
+    this.key = key;
     this.object = {};
 }
 
